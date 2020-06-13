@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemies/enemyFlyingAlt_1.png" type="Texture" id=1]
+[ext_resource path="res://enemies/enemyWalking_1.png" type="Texture" id=2]
+[ext_resource path="res://enemies/enemyFlyingAlt_2.png" type="Texture" id=3]
+[ext_resource path="res://enemies/enemyWalking_2.png" type="Texture" id=4]
+[ext_resource path="res://enemies/enemySwimming_1.png" type="Texture" id=5]
+[ext_resource path="res://enemies/enemySwimming_2.png" type="Texture" id=6]
+[ext_resource path="res://Enemies.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Swim",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Fly",
+"speed": 4.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 48.6621
+
+[node name="Enemies" type="KinematicBody2D"]
+pause_mode = 1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 7 )
+min_speed = 250
+max_speed = 350
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 1 )
+animation = "Swim"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 10, 0 )
+scale = Vector2( 0.7, 0.7 )
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -8, -16 )
+scale = Vector2( 2.125, 1.6 )
+rect = Rect2( -10, 0, 30, 20 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="free_aliens"]
