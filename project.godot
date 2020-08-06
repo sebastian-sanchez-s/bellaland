@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Bellaland"
-run/main_scene="res://Bellaland.tscn"
+run/main_scene="res://src/scn/Bellaland.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -42,4 +42,4 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://res/map/default_env.tres"

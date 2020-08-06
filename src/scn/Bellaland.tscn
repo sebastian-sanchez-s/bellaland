@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/scn/Bella.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scn/Map.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/sound/jump and run - tropics.ogg" type="AudioStream" id=3]
+[ext_resource path="res://src/code/Bellaland.gd" type="Script" id=4]
+[ext_resource path="res://res/map/bg/dark_sky.png" type="Texture" id=5]
+[ext_resource path="res://src/scn/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/scn/Enemies.tscn" type="PackedScene" id=7]
+
+[node name="Bellaland" type="Node2D"]
+script = ExtResource( 4 )
+enemy_scn = ExtResource( 7 )
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 9600.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 832, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 0, -48 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 0, -160 )
+
+[node name="Map" parent="." instance=ExtResource( 2 )]
+
+[node name="Bella" parent="." instance=ExtResource( 1 )]
+position = Vector2( 72, 136 )
+scale = Vector2( 1, 1 )
+z_index = 1
+speed = 300
+jump_speed = 800
+gravity = 2000
+
+[node name="Camera2D" type="Camera2D" parent="Bella"]
+visible = false
+current = true
+limit_left = 0
+limit_top = -160
+limit_right = 4800
+limit_bottom = 360
+limit_smoothed = true
+smoothing_enabled = true
+drag_margin_left = 1.0
+drag_margin_top = 0.5
+drag_margin_right = 0.0
+drag_margin_bottom = 0.13
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Bella"]
+visible = false
+position = Vector2( 4.97149, 8 )
+rect = Rect2( -100, -250, 4800, 480 )
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="fall" from="Bella" to="." method="game_over"]
+[connection signal="screen_exited" from="Bella/VisibilityNotifier2D" to="Bella" method="_on_VisibilityNotifier2D_screen_exited"]

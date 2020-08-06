@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Jump_sprite.png-8bb5abd6b7217a1f7ea56660c2038a40.stex"
+path="res://.import/spriteSwimming.png-52fb8a4ebb7fbf3b34f07c08d7024307.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/bella_sprites/Jump_sprite.png"
-dest_files=[ "res://.import/Jump_sprite.png-8bb5abd6b7217a1f7ea56660c2038a40.stex" ]
+source_file="res://res/alien_sprites/spriteSwimming.png"
+dest_files=[ "res://.import/spriteSwimming.png-52fb8a4ebb7fbf3b34f07c08d7024307.stex" ]
 
 [params]
 

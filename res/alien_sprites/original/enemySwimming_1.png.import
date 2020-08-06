@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/candyLand_tileset_v1_1.png-f0eff53adf59cd64a6621550bb4f0f26.stex"
+path="res://.import/enemySwimming_1.png-4540a64da44be81fd0abef0e6ef3e33a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile/candyLand_tileset_v1_1.png"
-dest_files=[ "res://.import/candyLand_tileset_v1_1.png-f0eff53adf59cd64a6621550bb4f0f26.stex" ]
+source_file="res://res/alien_sprites/original/enemySwimming_1.png"
+dest_files=[ "res://.import/enemySwimming_1.png-4540a64da44be81fd0abef0e6ef3e33a.stex" ]
 
 [params]
 
