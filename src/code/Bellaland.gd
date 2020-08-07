@@ -1,8 +1,8 @@
 extends Node2D
 
 export (PackedScene) var enemy_scn
-onready var alien_timer : Timer = Timer.new()
-onready var last_cause_death : String
+onready var alien_timer			: Timer = Timer.new()
+onready var last_cause_death	: String
 
 func _ready():
 	$Bella.hide()
@@ -11,13 +11,11 @@ func _ready():
 	add_child(alien_timer)
 	alien_timer.connect("timeout", self, "gen_aliens")
 	
-	$HUD.start_menu()
-
+	$HUD.show_start_menu()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_end"):
 		get_tree().quit()
-
 
 func game_over(cause:String):
 	alien_timer.stop()
@@ -28,7 +26,7 @@ func game_over(cause:String):
 	
 	if cause == "fall":
 		$HUD.show_game_over("Oh no! \nHas caído!")
-	elif cause == "hit" and last_cause_death != "hit":
+	elif cause == "hit":
 		$HUD.show_game_over("Te han \nAbducido!")
 	
 	last_cause_death = cause
