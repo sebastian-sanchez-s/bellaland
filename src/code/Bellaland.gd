@@ -36,7 +36,7 @@ func game_over(cause:String):
 func new_game():
 	$Music.play()
 	
-	$Bella.start(Vector2(50, 100))
+	$Bella.set_position(Vector2(50, 100))
 	$Bella.show()
 	
 	alien_timer.start()
@@ -45,7 +45,7 @@ func new_game():
 func gen_aliens():
 	var alien = enemy_scn.instance()
 	
-	alien.offset = $Bella.position
+	alien.offset = $Bella.get_position()
 	
 	add_child(alien)
 	alien.connect("hit", self, "game_over", ["hit"])

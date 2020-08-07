@@ -13,8 +13,11 @@ var velocity : Vector2 = Vector2()
 func _ready():
 	screen_size = get_viewport_rect().size
 
-func start(pos):
+func set_position(pos):
 	position = pos
+
+func get_position():
+	return position
 
 func _physics_process(delta):
 	# Move left or right
