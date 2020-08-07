@@ -37,9 +37,6 @@ offset = Vector2( 0, -160 )
 position = Vector2( 72, 136 )
 scale = Vector2( 1, 1 )
 z_index = 1
-speed = 300
-jump_speed = 800
-gravity = 2000
 
 [node name="Camera2D" type="Camera2D" parent="Bella"]
 visible = false
