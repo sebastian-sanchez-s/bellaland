@@ -20,6 +20,5 @@ func map():
 
 
 func _ready():
-	tile.set_cell_size(Vector2(8, 8))
-	.set_scale(Vector2(4, 4))
-	map()
+	#map()
+	pass
