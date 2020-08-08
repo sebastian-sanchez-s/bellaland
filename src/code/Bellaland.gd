@@ -1,27 +1,32 @@
 extends Node2D
 
 export (PackedScene) var enemy_scn
-onready var alien_timer			: Timer = Timer.new()
-onready var last_cause_death	: String
+onready var alien_timer         : Timer = Timer.new()
+onready var last_cause_death    : String
+
+const ALIEN_FREQ : int = 2
 
 func _ready():
-	$Bella.connect("player_fall", self, "game_over", ["fall"])
-	$Bella.connect("player_hit", self, "game_over", ["hit"])
+	if $Bella.connect("player_dead", self, "_on_Bella_death"):
+		exit()
 	$Bella.hide()
 	
-	alien_timer.set_wait_time(2)
+	alien_timer.set_wait_time(ALIEN_FREQ)
 	add_child(alien_timer)
-	alien_timer.connect("timeout", self, "gen_aliens")
+	if alien_timer.connect("timeout", self, "generate_alien"):
+		exit()
 	
 	$HUD.show_start_menu()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_end"):
-		get_tree().quit()
+		exit()
 
-func game_over(cause_of_death : String):
+func exit():
+	get_tree().quit()
+
+func _on_Bella_death(cause_of_death : String):
 	alien_timer.stop()
-	$Bella.game_over(cause_of_death)
 	$Music.stop()
 	if cause_of_death == "fall":
 		$HUD.show_game_over("Oh no! \nHas caído!")
@@ -35,23 +40,14 @@ func new_game():
 	$Bella.start_game()
 	alien_timer.start()
 
-func _on_alien_hit():
-	$Bella.lose_lives()
-	if $Bella.is_dead():
-		$Bella.emit_signal("player_hit")
-	else:
-		$Bella.blink()
 
-func gen_aliens():
+func generate_alien():
 	var alien = enemy_scn.instance()
 	
 	alien.offset = $Bella.get_position()
 	
 	add_child(alien)
-	
-	alien.connect("hit", self, "_on_alien_hit")
-	alien.connect("hit", alien, "free_alien")
-	$HUD.connect("start_game", alien, "_on_new_game")
-	$Bella.connect("player_killed", alien, "_on_player_death")
-	
-	alien_timer.start()
+	if alien.connect("hit", alien, "free_alien") or $HUD.connect("start_game", alien, "free_alien") or alien.connect("hit", $Bella, "_on_Bella_hitted") or $Bella.connect("player_dead", alien, "_on_Bella_killed"):
+		alien.free_alien()
+	else:
+		alien_timer.start()
