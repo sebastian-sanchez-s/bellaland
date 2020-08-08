@@ -78,4 +78,4 @@ shape = SubResource( 8 )
 position = Vector2( -8, -16 )
 scale = Vector2( 2.125, 1.6 )
 rect = Rect2( -10, 0, 30, 20 )
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="free_aliens"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="free_alien"]

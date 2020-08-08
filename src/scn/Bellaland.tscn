@@ -59,5 +59,4 @@ visible = false
 position = Vector2( 4.97149, 8 )
 rect = Rect2( -100, -250, 4800, 480 )
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-[connection signal="fall" from="Bella" to="." method="game_over"]
 [connection signal="screen_exited" from="Bella/VisibilityNotifier2D" to="Bella" method="_on_VisibilityNotifier2D_screen_exited"]
