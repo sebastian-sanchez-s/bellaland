@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rising.ogg-1d22dabae5dafa080ded6cdb75b98143.oggstr"
+
+[deps]
+
+source_file="res://res/sound/Rising.ogg"
+dest_files=[ "res://.import/Rising.ogg-1d22dabae5dafa080ded6cdb75b98143.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

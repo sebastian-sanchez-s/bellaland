@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://res/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/code/HUD.gd" type="Script" id=2]
+[ext_resource path="res://res/sound/GAMEOVER.wav" type="AudioStream" id=3]
+[ext_resource path="res://res/sound/GUI_accept.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -16,6 +18,7 @@ pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="MessageLabel" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -34,6 +37,7 @@ __meta__ = {
 }
 
 [node name="StartButton" type="Button" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -47,4 +51,10 @@ text = "COMENZAR"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Accept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

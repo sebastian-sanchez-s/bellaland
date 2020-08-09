@@ -43,6 +43,7 @@ func _physics_process(delta):
 		if is_on_floor():
 			velocity.y -= jump_speed
 			$AnimatedSprite.play("Jump")
+			$JumpEffect.play()
 	if Input.is_action_just_pressed("ui_down"):
 		if not is_on_floor():
 			velocity.y += jump_speed*0.5
@@ -56,16 +57,18 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func play_death() -> void:
 	$AnimatedSprite.play("Death")
+	$DeathSound.play()
 
 func _on_Bella_hitted() -> void:
 	lives -= 1
 	if lives == 0:
+		play_death()
 		emit_signal("player_dead", "hit")
 	else:
 		blink()
 
 func blink() -> void:
-	for i in range(4):
+	for _i in range(4):
 		$AnimatedSprite.modulate.a = 0.5
 		yield(get_tree().create_timer(BLINK_TIME), "timeout")
 		$AnimatedSprite.modulate.a = 1
