@@ -65,6 +65,7 @@ func _on_Bella_hitted() -> void:
 		play_death()
 		emit_signal("player_dead", "hit")
 	else:
+		$Hit.play()
 		blink()
 
 func blink() -> void:
