@@ -4,7 +4,10 @@ signal player_dead(cause)
 
 class_name StatesMachine
 
-onready var animation = $AnimatedSprite
+onready var animation   = $AnimatedSprite
+onready var jump_sound  = $JumpEffect
+onready var hit_sound   = $Hit
+onready var death_sound = $DeathSound
 
 var curr_state_id = null
 var prev_state_id = null
@@ -21,7 +24,7 @@ func _ready():
 	add_state("Hit")
 	add_state("Death")
 	# start on idle state
-	curr_state_id = states_id.Idle
+	curr_state_id = states_id["Idle"]
 	# Death state is called by player_killed signal on hit state
 	if states_holder[states_id["Hit"]].connect("player_killed", self, "_change_state", ["Death"]):
 		print("Couldn't connect player_killed signal")
@@ -50,6 +53,7 @@ func _change_state(new_state):
 
 func _start():
 	position = Vector2(100,100)
+	_change_state("Idle")
 
 func _back():
 	curr_state_id = prev_state_id

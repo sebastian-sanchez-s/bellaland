@@ -2,8 +2,10 @@ extends "res://src/code/player_globals.gd"
 
 
 func _enter(host : KinematicBody2D):
-	velocity.y -= jump_speed
 	host.animation.play("Jump")
+	host.jump_sound.play()
+	
+	velocity.y -= jump_speed
 	velocity = host.move_and_slide(velocity, floor_normal)
 
 func _exit(host : KinematicBody2D):

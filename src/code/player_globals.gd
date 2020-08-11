@@ -16,6 +16,4 @@ var floor_normal : Vector2 = Vector2(0, -1)
 func _apply_gravity(delta):
 	velocity.y += gravity*delta
 
-# Graphics
-const BLINK_TIME : int = 2
 

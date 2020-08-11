@@ -2,6 +2,8 @@ extends "res://src/code/player_globals.gd"
 
 signal player_killed
 
+const BLINK_TIME : float = 1.0
+
 onready var blink_timer = Timer.new()
 
 var _host
@@ -14,6 +16,8 @@ func _ready():
 			print("Coudn't connect blink_timer signal")
 
 func _enter(host : KinematicBody2D):
+	host.hit_sound.play()
+	
 	lives -= 1
 	
 	if lives == 0:
@@ -33,3 +37,5 @@ func update(host : KinematicBody2D, _delta):
 	# Go to previous state
 	host._back()
 
+func _exit(host):
+	pass
