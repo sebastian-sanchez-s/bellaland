@@ -27,7 +27,7 @@ func _physics_process(delta):
 	if collision and collision.collider.name == "Bella":
 		emit_signal("hit")
 
-func _on_Bella_killed(cause : String):
+func _on_Bella_killed(_cause : String):
 	$Sprite.stop()
 	velocity = Vector2.ZERO
 
