@@ -9,7 +9,6 @@ const ALIEN_FREQ : int = 2
 func _ready():
 	if $Bella.connect("player_dead", self, "_on_Bella_death"):
 		exit()
-	$Bella.hide()
 	
 	alien_timer.set_wait_time(ALIEN_FREQ)
 	add_child(alien_timer)
@@ -37,7 +36,7 @@ func _on_Bella_death(cause_of_death : String):
 
 func new_game():
 	$Music.play()
-	$Bella.start_game()
+	$Bella._start()
 	alien_timer.start()
 
 
@@ -47,7 +46,7 @@ func generate_alien():
 	alien.offset = $Bella.get_position()
 	
 	add_child(alien)
-	if alien.connect("hit", alien, "free_alien") or $HUD.connect("start_game", alien, "free_alien") or alien.connect("hit", $Bella, "_on_Bella_hitted") or $Bella.connect("player_dead", alien, "_on_Bella_killed"):
+	if alien.connect("hit", alien, "free_alien") or $HUD.connect("start_game", alien, "free_alien") or alien.connect("hit", $Bella, "_change_state", ["Hit"]) or $Bella.connect("player_dead", alien, "_on_Bella_killed"):
 		alien.free_alien()
 	else:
 		alien_timer.start()
