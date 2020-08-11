@@ -4,7 +4,7 @@ signal player_dead(cause)
 
 class_name StatesMachine
 
-onready var animation   = $AnimatedSprite
+onready var animation   = $Sprite
 onready var jump_sound  = $JumpEffect
 onready var hit_sound   = $Hit
 onready var death_sound = $DeathSound
@@ -19,6 +19,7 @@ var states_holder = {}
 func _ready():
 	add_state("Idle")
 	add_state("Walk")
+	add_state("Run")
 	add_state("Jump")
 	add_state("Fall")
 	add_state("Hit")

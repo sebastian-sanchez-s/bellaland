@@ -12,13 +12,13 @@ func _exit(host : KinematicBody2D):
 	host.animation.stop()
 
 func _get_input_and_apply_move(host):
-	var move_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var move_direction = Input.get_action_strength("Right_key") - Input.get_action_strength("Left_key")
 	velocity.x = on_air_speed*move_direction
 	host.move_and_slide(velocity, floor_normal)
 	
 	host.animation.flip_h = velocity.x < 0
 	
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("Down_key"):
 		velocity.y += fall_speed
 	
 	velocity = host.move_and_slide(velocity, floor_normal)
