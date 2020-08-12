@@ -1,34 +1,20 @@
 extends CanvasLayer
 
 signal start_game
+signal end_game
 
-const GAME_OVER_DELAY : int =  2
-var game_over_timer : Timer
+onready var OutGame = $OutGame
+#onready var InGame  = $InGame
 
-func _ready():
-	game_over_timer = Timer.new()
-	add_child(game_over_timer)
-	if  game_over_timer.connect("timeout", self, "show_start_menu"):
-		pass
-	game_over_timer.one_shot = true
+func _on_GameOver(msg : String):
+	#InGame.hide()
+	OutGame.show_game_over(msg)
 
-func show_game_over(msg):
-	$GameOver.play()
-	$MessageLabel.text = msg
-	$MessageLabel.show()
-	
-	game_over_timer.start(GAME_OVER_DELAY)
+func _on_NewGame():
+	OutGame.show_start_menu()
 
-
-func show_start_menu():
-	$MessageLabel.text = "Bellaland"
-	$MessageLabel.show()
-	
-	$StartButton.show()
-
-
-func _on_StartButton_pressed():
+func _on_StartGame():
 	emit_signal("start_game")
-	$Accept.play()
-	$MessageLabel.hide()
-	$StartButton.hide()
+
+func _on_ExitGame():
+	emit_signal("end_game")

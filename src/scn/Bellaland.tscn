@@ -38,7 +38,6 @@ position = Vector2( 100, 100 )
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Bella"]
-visible = false
 current = true
 limit_left = 0
 limit_top = -160
@@ -55,7 +54,8 @@ editor_draw_drag_margin = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Bella"]
 visible = false
-position = Vector2( 4.97149, 8 )
+position = Vector2( 5, 8 )
 rect = Rect2( -100, -250, 4800, 480 )
+[connection signal="end_game" from="HUD" to="." method="exit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="screen_exited" from="Bella/VisibilityNotifier2D" to="Bella" method="_on_PlayerFall"]
