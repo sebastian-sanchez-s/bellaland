@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://res/fonts/a-alloy-ink-font/AlloyInk-lgdWw.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/code/HUD.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://res/sound/GUI_accept.wav" type="AudioStream" id=4]
 [ext_resource path="res://res/fonts/a-alloy-ink-font/AlloyInk-nRLyO.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/code/HUD/OutGame.gd" type="Script" id=6]
+[ext_resource path="res://src/code/HUD/InGame.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -44,6 +45,7 @@ stream = ExtResource( 4 )
 stream = ExtResource( 3 )
 
 [node name="Title" type="Label" parent="OutGame"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -51,7 +53,7 @@ margin_left = -200.0
 margin_right = 200.0
 margin_bottom = -49.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 0, 0.843137, 1 )
+custom_colors/font_color = Color( 1, 0, 0.682353, 1 )
 text = "Bellaland"
 align = 1
 valign = 1
@@ -61,6 +63,7 @@ __meta__ = {
 }
 
 [node name="Menu" type="VBoxContainer" parent="OutGame"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -77,6 +80,7 @@ margin_right = 170.0
 margin_bottom = 36.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.541176, 0.0117647, 0.0117647, 1 )
 text = "Comenzar"
 flat = true
 __meta__ = {
@@ -88,6 +92,8 @@ margin_top = 40.0
 margin_right = 170.0
 margin_bottom = 73.0
 custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.541176, 0.0117647, 0.0117647, 1 )
 text = "Settings"
 
 [node name="Exit" type="Button" parent="OutGame/Menu"]
@@ -95,8 +101,24 @@ margin_top = 77.0
 margin_right = 170.0
 margin_bottom = 103.0
 custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.541176, 0.0117647, 0.0117647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Exit"
 flat = true
+
+[node name="InGame" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="LivesHolder" type="HBoxContainer" parent="InGame"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+grow_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="exit" from="OutGame" to="." method="_on_ExitGame"]
 [connection signal="start" from="OutGame" to="." method="_on_StartGame"]
 [connection signal="pressed" from="OutGame/Menu/Start" to="OutGame" method="_on_StartBtn_pressed"]
