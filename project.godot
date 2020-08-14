@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "States",
+"language": "GDScript",
+"path": "res://src/code/BellaStates/global.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "StatesMachine",
 "language": "GDScript",
 "path": "res://src/code/Bella.gd"
 } ]
 _global_script_class_icons={
+"States": "",
 "StatesMachine": ""
 }
 

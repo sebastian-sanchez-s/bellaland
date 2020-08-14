@@ -54,6 +54,7 @@ func _change_state(new_state):
 
 func _start():
 	position = Vector2(100,100)
+	$States.set_lives(3)
 	_change_state("Idle")
 
 func _back():

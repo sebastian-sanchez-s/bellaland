@@ -1,4 +1,6 @@
-extends "res://src/code/BellaStates/global.gd"
+extends Node
+
+onready var Global = get_parent()
 
 signal player_dead
 
@@ -11,7 +13,7 @@ func _enter(host : KinematicBody2D):
 	   finished it stop (avoiding death loop animation)
 	3. Tell the state machine that the player has been killed
 	"""
-	velocity = Vector2.ZERO
+	Global.velocity = Vector2.ZERO
 	
 	host.death_sound.play()
 	host.animation.play("Death")

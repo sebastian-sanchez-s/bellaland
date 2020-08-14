@@ -1,36 +1,38 @@
-extends "res://src/code/BellaStates/global.gd"
+extends Node
+
+onready var Global = get_parent()
 
 func _enter(host : KinematicBody2D):
 	host.animation.play("Fall")
-	velocity = host.move_and_slide(velocity, floor_normal)
+	Global.velocity = host.move_and_slide(Global.velocity, Global.floor_normal)
 
 func _exit(host : KinematicBody2D):
 	host.animation.stop()
 
 func _get_input_and_apply_move(host):
 	var move_direction = Input.get_action_strength("Right_key") - Input.get_action_strength("Left_key")
-	velocity.x = on_air_speed*move_direction
-	velocity = host.move_and_slide(velocity, floor_normal)
+	Global.velocity.x = Global.on_air_speed*move_direction
+	Global.velocity = host.move_and_slide(Global.velocity, Global.floor_normal)
 	
-	host.animation.flip_h = velocity.x < 0
+	host.animation.flip_h = Global.velocity.x < 0
 	
 	if Input.is_action_just_pressed("Down_key"):
-		velocity.y += fall_speed
+		Global.velocity.y += Global.fall_speed
 	
-	velocity = host.move_and_slide(velocity, floor_normal)
-	is_on_floor = host.is_on_floor()
+	Global.velocity = host.move_and_slide(Global.velocity, Global.floor_normal)
+	Global.is_on_floor = host.is_on_floor()
 
 func update(host : KinematicBody2D, delta):
-	_apply_gravity(delta)
+	Global._apply_gravity(delta)
 	_get_input_and_apply_move(host)
-	_is_running()
+	Global._is_running()
 
-	if is_on_floor:
-		if velocity.x == 0:
+	if Global.is_on_floor:
+		if Global.velocity.x == 0:
 			return 'Idle'
-		elif is_running:
+		elif Global.is_running:
 			return 'Run'
 		else:
 			return 'Walk'
-	if velocity.y < 0:
+	if Global.velocity.y < 0:
 		return 'Jump'

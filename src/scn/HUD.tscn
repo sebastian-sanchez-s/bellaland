@@ -119,8 +119,8 @@ grow_horizontal = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="exit" from="OutGame" to="." method="_on_ExitGame"]
-[connection signal="start" from="OutGame" to="." method="_on_StartGame"]
+[connection signal="exit" from="OutGame" to="." method="_on_end_game"]
+[connection signal="start" from="OutGame" to="." method="_on_start_game"]
 [connection signal="pressed" from="OutGame/Menu/Start" to="OutGame" method="_on_StartBtn_pressed"]
 [connection signal="pressed" from="OutGame/Menu/Settings" to="OutGame" method="_on_SettingsBtn_pressed"]
 [connection signal="pressed" from="OutGame/Menu/Exit" to="OutGame" method="_on_ExitBtn_pressed"]

@@ -20,12 +20,12 @@ func _ready():
 	if alien_timer.connect("timeout", self, "generate_alien"):
 		exit()
 	
-	Player.hide()
-	HUD._on_NewGame(PlayerData.lives)
+	HUD.show_start_menu()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_end"):
 		exit()
+	print(PlayerData.get_lives())
 
 func exit():
 	get_tree().quit()
@@ -35,21 +35,21 @@ func _on_Bella_death(cause_of_death : String):
 	Music.stop()
 	Player.hide()
 	if cause_of_death == "fall":
-		HUD._on_GameOver("Oh no! \nHas caido!")
+		HUD.game_over("Oh no! \nHas caido!")
 	elif cause_of_death == "hit":
-		HUD._on_GameOver("Te han \nAbducido!")
+		HUD.game_over("Te han \nAbducido!")
 
 func new_game():
 	Music.play()
 	Player._start()
 	Player.show()
 	alien_timer.start()
-
+	HUD.start_game(PlayerData.get_lives())
 
 func generate_alien():
 	var alien = enemy_scn.instance()
 	
-	alien.offset = $Bella.get_position()
+	alien.offset = Player.get_position()
 	
 	add_child(alien)
 	if alien.connect("hit", alien, "free_alien") or\

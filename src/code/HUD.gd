@@ -6,16 +6,18 @@ signal end_game
 onready var OutGame = $OutGame
 onready var InGame  = $InGame
 
-func _on_GameOver(msg : String):
-	InGame._on_GameOver()
+func game_over(msg : String):
+	InGame.clean_LivesHolder()
 	OutGame.show_game_over(msg)
 
-func _on_NewGame(lives : int):
+func start_game(lives : int):
+	InGame.fill_LivesHolder(lives)
+
+func show_start_menu():
 	OutGame.show_start_menu()
-	InGame._on_NewGame(lives)
 
-func _on_StartGame():
-	emit_signal("start_game")
-
-func _on_ExitGame():
+func _on_end_game():
 	emit_signal("end_game")
+
+func _on_start_game():
+	emit_signal("start_game")

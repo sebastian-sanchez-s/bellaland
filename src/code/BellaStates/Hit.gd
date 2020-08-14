@@ -1,4 +1,6 @@
-extends "res://src/code/BellaStates/global.gd"
+extends Node
+
+onready var Global = get_parent()
 
 signal player_killed
 
@@ -18,9 +20,9 @@ func _ready():
 func _enter(host : KinematicBody2D):
 	host.hit_sound.play()
 	
-	lives -= 1
+	Global.lives -= 1
 	
-	if lives == 0:
+	if Global.lives == 0:
 		emit_signal("player_killed")
 	else:
 		host_reference = host

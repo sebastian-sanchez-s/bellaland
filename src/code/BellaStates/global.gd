@@ -1,4 +1,5 @@
 extends Node
+class_name States
 
 const gravity      : int     = 480
 const jump_speed   : int     = 250
@@ -7,7 +8,7 @@ const on_air_speed : int     = 100
 const walk_speed   : int     = 150
 const run_speed    : int     = 250
 
-onready var lives = 3
+onready var lives : int
 onready var velocity     : Vector2 = Vector2.ZERO
 onready var is_on_floor  : bool    = false
 onready var is_running   : bool    = false
@@ -19,3 +20,9 @@ func _is_running():
 
 func _apply_gravity(delta):
 	velocity.y += gravity*delta
+
+func set_lives(initial_lives):
+	lives = initial_lives
+
+func get_lives():
+	return lives
