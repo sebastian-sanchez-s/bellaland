@@ -1,4 +1,4 @@
-extends "res://src/code/player_globals.gd"
+extends "res://src/code/BellaStates/global.gd"
 
 signal player_killed
 
@@ -6,7 +6,7 @@ const BLINK_TIME : float = 1.0
 
 onready var blink_timer = Timer.new()
 
-var _host
+var host_reference
 
 func _ready():
 	blink_timer.one_shot = true
@@ -23,7 +23,7 @@ func _enter(host : KinematicBody2D):
 	if lives == 0:
 		emit_signal("player_killed")
 	else:
-		_host = host
+		host_reference = host
 		_start_blink(host)
 
 func _start_blink(host):
@@ -31,11 +31,11 @@ func _start_blink(host):
 	blink_timer.start()
 
 func _stop_blink():
-	_host.animation.self_modulate.a = 1.0
+	host_reference.animation.self_modulate.a = 1.0
 
 func update(host : KinematicBody2D, _delta):
 	# Go to previous state
 	host._back()
 
-func _exit(host):
+func _exit(_host):
 	pass

@@ -1,4 +1,4 @@
-extends "res://src/code/player_globals.gd"
+extends "res://src/code/BellaStates/global.gd"
 
 func _enter(host : KinematicBody2D):
 	host.animation.play("Walk")
@@ -15,14 +15,17 @@ func _get_input_and_apply_move(host):
 	host.animation.flip_h = velocity.x < 0
 
 func update(host : KinematicBody2D, delta):
-	if velocity.x == 0:
-		return 'Idle'
-	if Input.is_action_just_pressed("Run_key"):
-		return 'Run'
-	if Input.is_action_just_pressed("Jump_key"):
-		return 'Jump'
-	if velocity.y > 0:
-		return 'Fall'
-	
 	_apply_gravity(delta)
 	_get_input_and_apply_move(host)
+	_is_running()
+	
+	if Input.is_action_just_pressed("Jump_key"):
+		return 'Jump'
+	
+	if velocity.x == 0:
+		return 'Idle'
+	elif is_running:
+		return 'Run'
+	
+	if velocity.y > 0:
+		return 'Fall'

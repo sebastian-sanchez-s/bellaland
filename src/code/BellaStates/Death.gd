@@ -1,4 +1,4 @@
-extends "res://src/code/player_globals.gd"
+extends "res://src/code/BellaStates/global.gd"
 
 signal player_dead
 
@@ -20,8 +20,8 @@ func _enter(host : KinematicBody2D):
 	
 	emit_signal("player_dead")
 
-func _exit(host : KinematicBody2D):
+func _exit(_host : KinematicBody2D):
 	pass
 
-func update(host : KinematicBody2D, _delta):
+func update(_host : KinematicBody2D, _delta):
 	pass

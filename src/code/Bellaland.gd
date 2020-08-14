@@ -2,11 +2,12 @@ extends Node2D
 
 export (PackedScene) var enemy_scn
 
-onready var Player = $Bella
-onready var Music  = $Music
-onready var HUD    = $HUD
+onready var Player     = $Bella
+onready var PlayerData = $Bella/States
+onready var Music      = $Music
+onready var HUD        = $HUD
 
-onready var alien_timer         : Timer = Timer.new()
+onready var alien_timer : Timer = Timer.new()
 
 const ALIEN_FREQ : int = 5
 
@@ -20,7 +21,7 @@ func _ready():
 		exit()
 	
 	Player.hide()
-	HUD._on_NewGame()
+	HUD._on_NewGame(PlayerData.lives)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_end"):
@@ -34,7 +35,7 @@ func _on_Bella_death(cause_of_death : String):
 	Music.stop()
 	Player.hide()
 	if cause_of_death == "fall":
-		HUD._on_GameOver("Oh no! \nHas caído!")
+		HUD._on_GameOver("Oh no! \nHas caido!")
 	elif cause_of_death == "hit":
 		HUD._on_GameOver("Te han \nAbducido!")
 
@@ -51,7 +52,11 @@ func generate_alien():
 	alien.offset = $Bella.get_position()
 	
 	add_child(alien)
-	if alien.connect("hit", alien, "free_alien") or HUD.connect("start_game", alien, "free_alien") or alien.connect("hit", Player, "_change_state", ["Hit"]) or Player.connect("player_dead", alien, "_on_Bella_killed"):
+	if alien.connect("hit", alien, "free_alien") or\
+	alien.connect("hit", HUD.get_node("InGame"), "_on_PlayerHit") or\
+	HUD.connect("start_game", alien, "free_alien") or\
+	alien.connect("hit", Player, "_change_state", ["Hit"]) or\
+	Player.connect("player_dead", alien, "_on_Bella_killed"):
 		alien.free_alien()
 	else:
 		alien_timer.start()

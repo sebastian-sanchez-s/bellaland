@@ -1,4 +1,4 @@
-extends "res://src/code/player_globals.gd"
+extends "res://src/code/BellaStates/global.gd"
 
 func _enter(host : KinematicBody2D):
 	host.animation.play("Fall")
@@ -23,10 +23,13 @@ func _get_input_and_apply_move(host):
 func update(host : KinematicBody2D, delta):
 	_apply_gravity(delta)
 	_get_input_and_apply_move(host)
+	_is_running()
 
 	if is_on_floor:
 		if velocity.x == 0:
 			return 'Idle'
+		elif is_running:
+			return 'Run'
 		else:
 			return 'Walk'
 	if velocity.y < 0:
