@@ -25,7 +25,6 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_end"):
 		exit()
-	print(PlayerData.get_lives())
 
 func exit():
 	get_tree().quit()
