@@ -39,16 +39,15 @@ z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Bella"]
 current = true
-limit_left = 0
-limit_top = -160
-limit_right = 4800
-limit_bottom = 360
+limit_left = -1
+limit_top = -200
+limit_bottom = 350
 limit_smoothed = true
 smoothing_enabled = true
 drag_margin_left = 1.0
 drag_margin_top = 0.5
-drag_margin_right = 0.0
-drag_margin_bottom = 0.13
+drag_margin_right = 0.5
+drag_margin_bottom = 0.5
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
