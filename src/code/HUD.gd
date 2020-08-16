@@ -14,6 +14,7 @@ func start_game(lives : int):
 	InGame.fill_LivesHolder(lives)
 
 func show_start_menu():
+	InGame.clean_LivesHolder()
 	OutGame.show_start_menu()
 
 func _on_end_game():

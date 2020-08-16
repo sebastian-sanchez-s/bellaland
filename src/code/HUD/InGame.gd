@@ -18,17 +18,11 @@ func fill_LivesHolder(lives : int):
 	LivesHolder.show()
 
 func clean_LivesHolder():
-	var remaining_lives = LivesHolder.get_child_count()
-	
-	for _heart in remaining_lives:
-		LivesHolder.get_child(0).queue_free()
-	
-	print(LivesHolder.get_child_count())
+	for heart in LivesHolder.get_children():
+		heart.queue_free()
 	
 	LivesHolder.hide()
 
 func _on_PlayerHit():
 	if LivesHolder.get_child_count():
 		LivesHolder.get_child(0).queue_free()
-	
-	print(LivesHolder.get_child_count())

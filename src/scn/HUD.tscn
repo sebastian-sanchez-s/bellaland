@@ -45,7 +45,6 @@ stream = ExtResource( 4 )
 stream = ExtResource( 3 )
 
 [node name="Title" type="Label" parent="OutGame"]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -63,7 +62,6 @@ __meta__ = {
 }
 
 [node name="Menu" type="VBoxContainer" parent="OutGame"]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
